@@ -350,6 +350,7 @@ sourcesIndex["opaque_debug"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["openssl_probe"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["os_str_bytes"] = {"name":"","dirs":[{"name":"common","files":["mod.rs","raw.rs"]}],"files":["iter.rs","lib.rs","pattern.rs","raw_str.rs","util.rs"]};
 sourcesIndex["owning_ref"] = {"name":"","files":["lib.rs"]};
+sourcesIndex["pallet_alliance"] = {"name":"","files":["benchmarking.rs","lib.rs","types.rs","weights.rs"]};
 sourcesIndex["pallet_asset_tx_payment"] = {"name":"","files":["lib.rs","payment.rs"]};
 sourcesIndex["pallet_assets"] = {"name":"","files":["benchmarking.rs","extra_mutator.rs","functions.rs","impl_fungibles.rs","impl_stored_map.rs","lib.rs","types.rs","weights.rs"]};
 sourcesIndex["pallet_atomic_swap"] = {"name":"","files":["lib.rs"]};
