@@ -2165,6 +2165,8 @@
 <span id="2160">2160</span>
 <span id="2161">2161</span>
 <span id="2162">2162</span>
+<span id="2163">2163</span>
+<span id="2164">2164</span>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.</span>
 
 <span class="comment">// Copyright (C) 2018-2022 Parity Technologies (UK) Ltd.</span>
@@ -3659,12 +3661,14 @@
 <span class="macro">parameter_types!</span> {
 	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MigrationSignedDepositPerItem</span>: <span class="ident">Balance</span> <span class="op">=</span> <span class="number">1</span> <span class="op">*</span> <span class="ident">CENTS</span>;
 	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MigrationSignedDepositBase</span>: <span class="ident">Balance</span> <span class="op">=</span> <span class="number">20</span> <span class="op">*</span> <span class="ident">DOLLARS</span>;
+	<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MigrationMaxKeyLen</span>: <span class="ident">u32</span> <span class="op">=</span> <span class="number">512</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">pallet_state_trie_migration::Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
 	<span class="kw">type</span> <span class="ident">Event</span> <span class="op">=</span> <span class="ident">Event</span>;
 	<span class="kw">type</span> <span class="ident">ControlOrigin</span> <span class="op">=</span> <span class="ident">EnsureRoot</span><span class="op">&lt;</span><span class="ident">AccountId</span><span class="op">&gt;</span>;
 	<span class="kw">type</span> <span class="ident">Currency</span> <span class="op">=</span> <span class="ident">Balances</span>;
+	<span class="kw">type</span> <span class="ident">MaxKeyLen</span> <span class="op">=</span> <span class="ident">MigrationMaxKeyLen</span>;
 	<span class="kw">type</span> <span class="ident">SignedDepositPerItem</span> <span class="op">=</span> <span class="ident">MigrationSignedDepositPerItem</span>;
 	<span class="kw">type</span> <span class="ident">SignedDepositBase</span> <span class="op">=</span> <span class="ident">MigrationSignedDepositBase</span>;
 	<span class="comment">// Warning: this is not advised, as it might allow the chain to be temporarily DOS-ed.</span>

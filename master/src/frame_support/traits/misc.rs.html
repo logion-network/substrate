@@ -987,16 +987,6 @@
 <span id="982">982</span>
 <span id="983">983</span>
 <span id="984">984</span>
-<span id="985">985</span>
-<span id="986">986</span>
-<span id="987">987</span>
-<span id="988">988</span>
-<span id="989">989</span>
-<span id="990">990</span>
-<span id="991">991</span>
-<span id="992">992</span>
-<span id="993">993</span>
-<span id="994">994</span>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.</span>
 
 <span class="comment">// Copyright (C) 2019-2022 Parity Technologies (UK) Ltd.</span>
@@ -1023,7 +1013,7 @@
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">sp_runtime::traits</span>::{
 	<span class="ident">ConstBool</span>, <span class="ident">ConstI128</span>, <span class="ident">ConstI16</span>, <span class="ident">ConstI32</span>, <span class="ident">ConstI64</span>, <span class="ident">ConstI8</span>, <span class="ident">ConstU128</span>, <span class="ident">ConstU16</span>, <span class="ident">ConstU32</span>,
-	<span class="ident">ConstU64</span>, <span class="ident">ConstU8</span>, <span class="ident">Get</span>, <span class="ident">GetDefault</span>, <span class="ident">TypedGet</span>,
+	<span class="ident">ConstU64</span>, <span class="ident">ConstU8</span>, <span class="ident">Get</span>, <span class="ident">GetDefault</span>, <span class="ident">TryCollect</span>, <span class="ident">TypedGet</span>,
 };
 <span class="kw">use</span> <span class="ident">sp_runtime</span>::{<span class="ident">traits::Block</span> <span class="kw">as</span> <span class="ident">BlockT</span>, <span class="ident">DispatchError</span>};
 <span class="kw">use</span> <span class="ident">sp_std</span>::{<span class="ident">cmp::Ordering</span>, <span class="ident">prelude</span>::<span class="kw-2">*</span>};
@@ -1364,16 +1354,6 @@
 	<span class="kw">fn</span> <span class="ident">defensive_saturating_mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
 		<span class="self">self</span>.<span class="ident">checked_mul</span>(<span class="kw-2">&amp;</span><span class="ident">other</span>).<span class="ident">defensive_unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">saturating_mul</span>(<span class="ident">other</span>))
 	}
-}
-
-<span class="doccomment">/// Try and collect into a collection `C`.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TryCollect</span><span class="op">&lt;</span><span class="ident">C</span><span class="op">&gt;</span> {
-	<span class="kw">type</span> <span class="ident">Error</span>;
-	<span class="doccomment">/// Consume self and try to collect the results into `C`.</span>
-	<span class="doccomment">///</span>
-	<span class="doccomment">/// This is useful in preventing the undesirable `.collect().try_into()` call chain on</span>
-	<span class="doccomment">/// collections that need to be converted into a bounded type (e.g. `BoundedVec`).</span>
-	<span class="kw">fn</span> <span class="ident">try_collect</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident"><span class="self">Self</span>::Error</span><span class="op">&gt;</span>;
 }
 
 <span class="doccomment">/// Anything that can have a `::len()` method.</span>
