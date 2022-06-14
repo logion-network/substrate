@@ -470,9 +470,9 @@
 
 <span class="doccomment">/// Execute the supplied function, adding a new storage layer.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// This is the same as `with_transaction`, but assuming that any function returning</span>
-<span class="doccomment">/// an `Err` should rollback, and any function returning `Ok` should commit. This</span>
-<span class="doccomment">/// provides a cleaner API to the developer who wants this behavior.</span>
+<span class="doccomment">/// This is the same as `with_transaction`, but assuming that any function returning an `Err` should</span>
+<span class="doccomment">/// rollback, and any function returning `Ok` should commit. This provides a cleaner API to the</span>
+<span class="doccomment">/// developer who wants this behavior.</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_storage_layer</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">E</span><span class="op">&gt;</span>
 <span class="kw">where</span>
 	<span class="ident">E</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">DispatchError</span><span class="op">&gt;</span>,
