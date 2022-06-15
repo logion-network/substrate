@@ -2167,6 +2167,9 @@
 <span id="2162">2162</span>
 <span id="2163">2163</span>
 <span id="2164">2164</span>
+<span id="2165">2165</span>
+<span id="2166">2166</span>
+<span id="2167">2167</span>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.</span>
 
 <span class="comment">// Copyright (C) 2018-2022 Parity Technologies (UK) Ltd.</span>
@@ -3647,6 +3650,10 @@
 	<span class="kw">type</span> <span class="ident">Call</span> <span class="op">=</span> <span class="ident">Call</span>;
 	<span class="kw">type</span> <span class="ident">FeeDestination</span> <span class="op">=</span> ();
 	<span class="kw">type</span> <span class="ident">WeightInfo</span> <span class="op">=</span> <span class="ident">pallet_transaction_storage::weights::SubstrateWeight</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>;
+	<span class="kw">type</span> <span class="ident">MaxBlockTransactions</span> <span class="op">=</span>
+		<span class="ident">ConstU32</span><span class="op">&lt;</span>{ <span class="ident">pallet_transaction_storage::DEFAULT_MAX_BLOCK_TRANSACTIONS</span> }<span class="op">&gt;</span>;
+	<span class="kw">type</span> <span class="ident">MaxTransactionSize</span> <span class="op">=</span>
+		<span class="ident">ConstU32</span><span class="op">&lt;</span>{ <span class="ident">pallet_transaction_storage::DEFAULT_MAX_TRANSACTION_SIZE</span> }<span class="op">&gt;</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">pallet_whitelist::Config</span> <span class="kw">for</span> <span class="ident">Runtime</span> {
@@ -3843,7 +3850,6 @@
 	<span class="ident">frame_system::ChainContext</span><span class="op">&lt;</span><span class="ident">Runtime</span><span class="op">&gt;</span>,
 	<span class="ident">Runtime</span>,
 	<span class="ident">AllPalletsWithSystem</span>,
-	(),
 <span class="op">&gt;</span>;
 
 <span class="doccomment">/// MMR helper types.</span>
