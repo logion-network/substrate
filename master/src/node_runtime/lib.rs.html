@@ -2170,6 +2170,7 @@
 <span id="2165">2165</span>
 <span id="2166">2166</span>
 <span id="2167">2167</span>
+<span id="2168">2168</span>
 </pre><pre class="rust"><code><span class="comment">// This file is part of Substrate.</span>
 
 <span class="comment">// Copyright (C) 2018-2022 Parity Technologies (UK) Ltd.</span>
@@ -2196,7 +2197,7 @@
 
 <span class="kw">use</span> <span class="ident">codec</span>::{<span class="ident">Decode</span>, <span class="ident">Encode</span>, <span class="ident">MaxEncodedLen</span>};
 <span class="kw">use</span> <span class="ident">frame_election_provider_support</span>::{
-	<span class="ident">onchain</span>, <span class="ident">ElectionDataProvider</span>, <span class="ident">ExtendedBalance</span>, <span class="ident">SequentialPhragmen</span>, <span class="ident">VoteWeight</span>,
+	<span class="ident">onchain</span>, <span class="ident">BalancingConfig</span>, <span class="ident">ElectionDataProvider</span>, <span class="ident">SequentialPhragmen</span>, <span class="ident">VoteWeight</span>,
 };
 <span class="kw">use</span> <span class="ident">frame_support</span>::{
 	<span class="ident">construct_runtime</span>,
@@ -2802,10 +2803,10 @@
 
 <span class="doccomment">/// A source of random balance for NposSolver, which is meant to be run by the OCW election miner.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OffchainRandomBalancing</span>;
-<span class="kw">impl</span> <span class="ident">Get</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">ExtendedBalance</span>)<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OffchainRandomBalancing</span> {
-	<span class="kw">fn</span> <span class="ident">get</span>() -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">ExtendedBalance</span>)<span class="op">&gt;</span> {
+<span class="kw">impl</span> <span class="ident">Get</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BalancingConfig</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">OffchainRandomBalancing</span> {
+	<span class="kw">fn</span> <span class="ident">get</span>() -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BalancingConfig</span><span class="op">&gt;</span> {
 		<span class="kw">use</span> <span class="ident">sp_runtime::traits::TrailingZeroInput</span>;
-		<span class="kw">let</span> <span class="ident">iters</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">MINER_MAX_ITERATIONS</span> {
+		<span class="kw">let</span> <span class="ident">iterations</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">MINER_MAX_ITERATIONS</span> {
 			<span class="number">0</span> =&gt; <span class="number">0</span>,
 			<span class="ident">max</span> =&gt; {
 				<span class="kw">let</span> <span class="ident">seed</span> <span class="op">=</span> <span class="ident">sp_io::offchain::random_seed</span>();
@@ -2816,7 +2817,8 @@
 			},
 		};
 
-		<span class="prelude-val">Some</span>((<span class="ident">iters</span>, <span class="number">0</span>))
+		<span class="kw">let</span> <span class="ident">config</span> <span class="op">=</span> <span class="ident">BalancingConfig</span> { <span class="ident">iterations</span>, <span class="ident">tolerance</span>: <span class="number">0</span> };
+		<span class="prelude-val">Some</span>(<span class="ident">config</span>)
 	}
 }
 
